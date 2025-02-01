@@ -15,14 +15,22 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open("love-sandwich")
 
 def get_sales_data():
-    print("Give some date pleeese\n")
-    data_str = input("Enter your data here: ")
-    print("Invalid input")
-    print(f"\nData provided: {data_str}")
 
-    sales_data = data_str.split(",")
-    
-    validate_data(sales_data)
+    while True:
+        print("Give some date pleeese\n")
+        data_str = input("Enter your data here: ")
+        print("Invalid input")
+        print(f"\nData provided: {data_str}")
+
+        sales_data = data_str.split(",")
+
+        if validate_data(sales_data):
+            print("Data is valid")
+            break
+
+    return sales_data
+
+
 
 def validate_data(values):
     
@@ -32,7 +40,8 @@ def validate_data(values):
             raise ValueError(f"Insert 6 Values. You provided {len(values)}")
     except ValueError as e:
         print(f"Invalid data: {e}, please try again")
+        return False
 
+    return True
 
-
-get_sales_data()
+data = get_sales_data()
