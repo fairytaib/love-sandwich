@@ -1,5 +1,6 @@
 # Write your code to expect a terminal of 80 characters wide and 24 rows high
 import gspread
+from pprint import pprint
 from google.oauth2.service_account import Credentials
 
 SCOPE = [
@@ -29,8 +30,6 @@ def get_sales_data():
 
     return sales_data
 
-
-
 def validate_data(values):
     
     try:
@@ -49,9 +48,19 @@ def update_sales_worksheet(data):
     sales_worksheet.append_row(data)
     print("Sales Worksheet updated\n")
 
+def calculate_surplus_data(sales_row):
+    print("Calc Surplus")
+    stock = SHEET.worksheet("stock").get_all_values()
+    stock_row = stock[len(stock) -1]
+
+    
+   
 
 
+def main():
+    data = get_sales_data()
+    sales_data = [int(num) for num in data]
+    update_sales_worksheet(sales_data)
+    calculate_surplus_data()
 
-data = get_sales_data()
-sales_data = [int(num) for num in data]
-update_sales_worksheet(sales_data)
+main()
