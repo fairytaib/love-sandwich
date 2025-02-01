@@ -14,8 +14,10 @@ GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 
 SHEET = GSPREAD_CLIENT.open("love-sandwich")
 
-sales = SHEET.worksheet("sales")
+def get_sales_data():
+    print("Give some date pleeese\n")
 
-data = sales.get_all_values()
+    data_str = input("Enter your data here: ")
+    print(f"\nData provided: {data_str}")
 
-print(data)
+get_sales_data()
