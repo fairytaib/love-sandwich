@@ -21,11 +21,13 @@ def get_sales_data():
     print(f"\nData provided: {data_str}")
 
     sales_data = data_str.split(",")
+    
     validate_data(sales_data)
 
 def validate_data(values):
     
     try:
+        [int(value) for value in values]
         if len(values) != 6:
             raise ValueError(f"Insert 6 Values. You provided {len(values)}")
     except ValueError as e:
