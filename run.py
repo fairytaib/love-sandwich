@@ -19,7 +19,6 @@ def get_sales_data():
     while True:
         print("Give some date pleeese\n")
         data_str = input("Enter your data here: ")
-        print("Invalid input")
         print(f"\nData provided: {data_str}")
 
         sales_data = data_str.split(",")
@@ -44,4 +43,15 @@ def validate_data(values):
 
     return True
 
+def update_sales_worksheet(data):
+    print("Update sales Worksheet...\n")
+    sales_worksheet = SHEET.worksheet("sales")
+    sales_worksheet.append_row(data)
+    print("Sales Worksheet updated\n")
+
+
+
+
 data = get_sales_data()
+sales_data = [int(num) for num in data]
+update_sales_worksheet(sales_data)
