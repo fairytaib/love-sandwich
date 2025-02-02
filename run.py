@@ -71,6 +71,18 @@ def get_last_5_sales():
 
     return columns
 
+def calculate_stockdata(data):
+    new_stockdata = []
+
+    for column in data:
+        int_column = [(value) for value in column]
+        average = sum(int_column / len(int_column))
+        stock_num = average * 1.1
+        new_stockdata.append(round(stock_num))
+    
+    return new_stockdata
+
+
 def main():
     data = get_sales_data()
     sales_data = [int(num) for num in data]
@@ -78,6 +90,9 @@ def main():
     new_surplus_data = calculate_surplus_data(sales_data)
     update_worksheet(new_surplus_data, "surplus")
     sales_columns = get_last_5_sales
+    stock_data = calculate_stockdata(sales_columns)
+    update_worksheet(stock_data, "stock")
+    
 
 # main()
 
